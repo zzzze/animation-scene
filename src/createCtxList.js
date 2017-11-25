@@ -7,15 +7,15 @@ function createArray(width, height) {
     var canvas_ui = createCanvas("canvas_ui", width, height, 3);
 
     return {
-        canvas_bg: canvas_bg, 
-        canvas_mian: canvas_mian, 
-        canvas_ui: canvas_ui
+        bg: canvas_bg, 
+        mian: canvas_mian, 
+        ui: canvas_ui
     }
 }
 
 function createCtxList(options) {
     var fragment = document.createDocumentFragment();
-    var container, width, height, canvasList = {}, ctxList = {};
+    var container, width, height, canvasList = {}, ctxList = [];
 
 
     if (options.id) {
@@ -46,7 +46,9 @@ function createCtxList(options) {
     var keys = Object.keys(canvasList);
     keys.forEach(function (key) {
         fragment.appendChild(canvasList[key]);
-        ctxList[key] = canvasList[key].getContext("2d");
+        var ctx = canvasList[key].getContext("2d");
+        if (key === "main") ctxList.push(ctx)
+        ctxList[key + "_ctx"] = ctx;
     });
     container.appendChild(fragment);
 
