@@ -10,7 +10,7 @@ module.exports = {
     output: {
         publicPath: "/",
         path: path.resolve(__dirname, 'min'),
-        filename: '[name]@' + version + '.min.js',
+        filename: '[name]-' + version + '.min.js',
         library: {
             root: "AnimationScene",
             amd: "animation-scene",
