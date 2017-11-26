@@ -1,17 +1,22 @@
 "use strict";
-var createCtxList = require("./createCtxList");
+var createCtxObj = require("./createCtxObj");
 
 var addMouseMoveListerner = (element, cb) => {
     element.addEventListener('mousemove', cb);
 };
 
 function Scene(options) {
-    this.ctxList = createCtxList(options);
-    this._autoLoop = true;
-    this._frameCount = 0;
+    this.ctxList = createCtxObj(options);
+    this.width = this.ctxList.width;
+    this.height = this.ctxList.height;
+    this.isSimpleScene = !!options.isSimpleScene;
 
-    addMouseMoveListerner(this.ctxList.ctx_ui.canvas, this._handleMouseMove.bind(this));
+    var canvas = this.isSimpleScene ? this.ctxList.ctx_main.canvas : this.ctxList.ctx_ui.canvas;
+    addMouseMoveListerner(canvas, this._handleMouseMove.bind(this));
 }
+
+Scene.prototype._autoLoop = true;
+Scene.prototype._frameCount = 0;
 
 Scene.prototype._handleMouseMove = function (event) {
     this._mouseX = event.offsetX;
@@ -19,22 +24,18 @@ Scene.prototype._handleMouseMove = function (event) {
 };
 
 Scene.prototype._run = function () {
-    this.clean(this.ctxList.ctx_bg);
+    if (!this.isSimpleScene) this.clean(this.ctxList.ctx_bg);
     
     if (this._autoLoop || this._frameCount < 1) {
         this.loop(this.ctxList.ctx_main);
     }
 
     this._frameCount++;
-    this._requestNextFrame(this._run.bind(this));
+    window.requestAnimationFrame(this._run.bind(this));
 };
 
 Scene.prototype.start = function () {
     this._run();
-};
-
-Scene.prototype._requestNextFrame = function (func) {
-    window.requestAnimationFrame(func);
 };
 
 Scene.prototype.loop = function () {

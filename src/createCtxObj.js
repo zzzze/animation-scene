@@ -1,21 +1,26 @@
 "use strict";
 var createCanvas = require("./createCanvas");
 
-function createArray(width, height) {
-    var canvas_bg = createCanvas("canvas_bg", width, height, 1);
+function createCanvasObj(isSimpleScene, width, height) {
     var canvas_main = createCanvas("canvas_main", width, height, 2);
-    var canvas_ui = createCanvas("canvas_ui", width, height, 3);
+
+    if (isSimpleScene) {
+        return {
+            main: canvas_main
+        }
+    }
 
     return {
-        bg: canvas_bg, 
+        bg: createCanvas("canvas_bg", width, height, 1), 
         main: canvas_main, 
-        ui: canvas_ui
+        ui: createCanvas("canvas_ui", width, height, 3)
     }
 }
 
-function createCtxList(options) {
+function createCtxObj(options) {
     var fragment = document.createDocumentFragment();
     var container, width, height, canvasList = {}, ctxList = [];
+    var isSimpleScene = !!options.isSimpleScene;
 
 
     if (options.id) {
@@ -26,8 +31,8 @@ function createCtxList(options) {
         container = document.createElement('div');
         container.style = canvas.style;
         container.style.position = 'relative';
-        container.style.width = container.style.width + 'px';
-        container.style.height = container.style.height + 'px';
+        container.style.width = style.width;
+        container.style.height = style.height;
         container.id = id;
         canvas.parentNode.insertBefore(container, canvas);
         canvas.remove();
@@ -43,7 +48,7 @@ function createCtxList(options) {
         
     }
 
-    canvasList = createArray(style.width, style.height);
+    canvasList = createCanvasObj(isSimpleScene, style.width, style.height);
     var keys = Object.keys(canvasList);
     keys.forEach(function (key) {
         fragment.appendChild(canvasList[key]);
@@ -53,7 +58,9 @@ function createCtxList(options) {
     });
     container.appendChild(fragment);
 
+    ctxList.width = parseInt(style.width);
+    ctxList.height = parseInt(style.height);
     return ctxList;
 }
 
-module.exports = createCtxList;
+module.exports = createCtxObj;

@@ -3,16 +3,25 @@ import { setTimeout } from "timers";
 require("normalize.css");
 "use strict";
 require("./src/style/main.scss");
-var Scene = require("../").Scene;
+var scene = require("../");
 
-var scene = new Scene({
+var scene = scene.createSimpleScene({
     containerId: "container"
 });
-scene._autoLoop = false;
+// scene._autoLoop = false;
+
+var x = 50, y = 50;
 scene.loop = function (ctx) {
-    console.log(ctx);
-    ctx.moveTo(50, 50);
-    ctx.lineTo(100, 200);
+    this.clean();
+    if (x + 1 < 300) {
+        x += 1;
+    } else {
+        x = -100;
+    }
+    
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + 100, y + 200);
     ctx.stroke();
 };
 scene.start();
