@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/zzzze/animation-scene/issues"
   },
-  "homepage": "https://github.com/zzzze/animation-scene#readme"
+  "homepage": "https://github.com/zzzze/animation-scene#readme",
+  "devDependencies": {
+    "webpack": "^3.8.1"
+  }
 }

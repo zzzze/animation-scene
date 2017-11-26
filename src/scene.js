@@ -1,7 +1,7 @@
 "use strict";
 var createCtxObj = require("./createCtxObj");
 
-var addMouseMoveListerner = (element, cb) => {
+var addMouseMoveListerner = function (element, cb) {
     element.addEventListener('mousemove', cb);
 };
 

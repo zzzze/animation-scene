@@ -1,0 +1,9 @@
+docs/
+test/
+src/
+example/
+.idea/
+node_modules/
+.travis.yml
+karma.config.js
+webpack.config.js
