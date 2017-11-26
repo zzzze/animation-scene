@@ -10,8 +10,7 @@ function Scene(options) {
     this._autoLoop = true;
     this._frameCount = 0;
 
-    addMouseMoveListerner(this.ctxList.ctx_ui.canvas, this._handleMouseMove);
-    this._run();
+    addMouseMoveListerner(this.ctxList.ctx_ui.canvas, this._handleMouseMove.bind(this));
 }
 
 Scene.prototype._handleMouseMove = function (event) {
@@ -20,14 +19,18 @@ Scene.prototype._handleMouseMove = function (event) {
 };
 
 Scene.prototype._run = function () {
-    this.clean(this.ctxList.bg_ctx);
-
-    if (this._autoLoop || this._frameCount <= 0) {
-        this.loop();
+    this.clean(this.ctxList.ctx_bg);
+    
+    if (this._autoLoop || this._frameCount < 1) {
+        this.loop(this.ctxList.ctx_main);
     }
 
     this._frameCount++;
-    this._requestNextFrame(this._run);
+    this._requestNextFrame(this._run.bind(this));
+};
+
+Scene.prototype.start = function () {
+    this._run();
 };
 
 Scene.prototype._requestNextFrame = function (func) {
@@ -39,8 +42,10 @@ Scene.prototype.loop = function () {
 };
 
 Scene.prototype.clean = function (ctx) {
-    if (!ctx) ctx = this.ctxList.main_ctx;
+    if (!ctx) ctx = this.ctxList.ctx_main;
     ctx.clearRect(0, 0, this.width, this.height);
 };
 
 Scene.prototype.draw = function () {};
+
+module.exports = Scene;
