@@ -1,11 +1,9 @@
-import { setTimeout } from "timers";
-
-require("normalize.css");
 "use strict";
+require("normalize.css");
 require("./src/style/main.scss");
 var scene = require("../");
 
-var scene = scene.createSimpleScene({
+var scene = scene.createScene({
     containerId: "container"
 });
 // scene._autoLoop = false;

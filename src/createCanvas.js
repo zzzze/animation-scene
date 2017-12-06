@@ -17,7 +17,7 @@ function createCanvas(id, width, height, zIndex) {
     canvas.style.position = 'absolute';
     canvas.style.width = width;
     canvas.style.height = height;
-    canvas.style.zIndex = zIndex;
+    canvas.style.zIndex = zIndex || 100;
     return canvas;
 }
 
