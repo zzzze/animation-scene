@@ -9,15 +9,14 @@
  * @param {Number} zIndex
  * @returns {HTMLCanvasElement}
  */
-function createCanvas(id, width, height, zIndex) {
+function createCanvas(id, width, height) {
     var canvas = document.createElement('canvas');
     canvas.id = id;
-    canvas.width = parseInt(width);
-    canvas.height = parseInt(height);
+    canvas.width = width;
+    canvas.height = height;
     canvas.style.position = 'absolute';
-    canvas.style.width = width;
-    canvas.style.height = height;
-    canvas.style.zIndex = zIndex || 100;
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
     return canvas;
 }
 

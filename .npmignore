@@ -7,3 +7,5 @@ node_modules/
 .travis.yml
 karma.config.js
 webpack.config.js
+coverage/
+npm-*

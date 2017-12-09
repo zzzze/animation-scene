@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var version = require("./package.json").version;
+var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     context: path.resolve(__dirname),
@@ -25,6 +26,9 @@ module.exports = {
                 warnings: false,
                 drop_console: true
             }
+        }),
+        new CleanWebpackPlugin(["min/"], {
+            verbose: true
         })
     ]
 };
