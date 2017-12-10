@@ -1,7 +1,7 @@
 {
   "name": "animation-scene",
-  "version": "0.2.0",
-  "description": "Create a canvas animation scene which can loop automatically and has other usefull attributions and methods.",  
+  "version": "0.2.1",
+  "description": "Create a canvas animation scene which can loop automatically and has other usefull attributions and methods.",
   "main": "index.js",
   "scripts": {
     "test": "karma start karma.config.js",
