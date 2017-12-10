@@ -19,13 +19,31 @@ var Scene = sceneInjector({
 
 var setup = sinon.spy(Scene.prototype, "setup");
 var start = sinon.spy(Scene.prototype, "start");
+var loop = sinon.spy(Scene.prototype, "loop");
 
 describe("scene", function () {
+    var scene;
+
+    beforeEach(function() {
+        scene = new Scene({});
+    });
+    afterEach(function () {
+        setup.reset();
+        loop.reset();
+        start.reset();
+    });
+
     it("should call setup method onece after scene.start called", function () {
-        var scene = new Scene({});
         scene.start();
 
         expect(setup.calledOnce).to.be.ok;
         expect(setup.calledAfter(start)).to.be.ok;
+    });
+
+    it("should call loop method after scene.start called", function () {
+        scene.noLoop();
+        scene.start();
+        expect(loop.calledOnce).to.be.ok;
+        expect(loop.calledAfter(start)).to.be.ok;
     });
 });

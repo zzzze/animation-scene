@@ -13,6 +13,8 @@ function Scene(options) {
 
 Scene.prototype._autoLoop = true;
 Scene.prototype._frameCount = 0;
+Scene.prototype._mouseX = Number.MAX_VALUE;
+Scene.prototype._mouseY = Number.MAX_VALUE;
 
 Scene.prototype._addMouseEventListerner = function () {
     this.ctx.canvas.addEventListener('mousemove', this._handleMouseMove.bind(this));
@@ -24,12 +26,11 @@ Scene.prototype._handleMouseMove = function (event) {
 };
 
 Scene.prototype._run = function () {
-    if (this._autoLoop || this._frameCount < 1) {
-        this.loop(this.ctx);
-    }
-
     this._frameCount++;
-    window.requestAnimationFrame(this._run.bind(this));
+    this.loop(this.ctx);
+    if (this._autoLoop) {
+        window.requestAnimationFrame(this._run.bind(this));
+    }
 };
 
 Scene.prototype.start = function () {
@@ -37,14 +38,38 @@ Scene.prototype.start = function () {
     this._run();
 };
 
-Scene.prototype.loop = function () {
-    this.clean();
-};
-
 Scene.prototype.setup = function () {};
+
+Scene.prototype.loop = function () {};
 
 Scene.prototype.clean = function () {
     this.ctx.clearRect(0, 0, this.width, this.height);
 };
+
+Scene.prototype.noLoop = function () {
+    this._autoLoop = false;
+};
+
+Scene.prototype.loopStart = function () {
+    this._autoLoop = true;
+};
+
+Object.defineProperties(Scene.prototype, {
+    "mouseX": {
+        get: function () {
+            return this._mouseX;
+        }
+    },
+    "mouseY": {
+        get: function () {
+            return this._mouseY;
+        }
+    },
+    "frameCount": {
+        get: function () {
+            return this._frameCount;
+        }
+    }
+});
 
 module.exports = Scene;
