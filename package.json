@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "karma start karma.config.js"
+    "test": "karma start karma.config.js",
+    "coveralls": "cat ./coverage/lcov/lcov.info | ./node_modules/.bin/coveralls"
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,5 @@
     "isparta-instrumenter-loader": "^1.0.1"
   },
   "dependencies": {
-    "crypto-browserify": "^3.12.0"
   }
 }

@@ -1,15 +1,25 @@
 "use strict";
 var createCanvas = require("./createCanvas");
-var randomString = require("randomstring");
+var genRandomString = require("./genRandomString");
 
 function createCtx(options) {
     var canvas, width, height;
 
-    if (options.id) {
-        canvas = document.getElementById(options.id);
-    } else if (options.canvas) {
+    if (options.canvas) {
+        var _canvas = createCanvas();
+        if (!_canvas.__proto__.isPrototypeOf(options.canvas)) {
+            throw TypeError("options.canvas should be a canvas element");
+        }
         canvas = options.canvas;
+    } else if (options.id) {
+        if (typeof options.id !== "string") {
+            throw TypeError("options.id should be a string");
+        }
+        canvas = document.getElementById(options.id);
     } else if (options.containerId) {
+        if (typeof options.containerId !== "string") {
+            throw TypeError("options.containerId should be a string");
+        }
         var container = document.getElementById(options.containerId);
         var style = window.getComputedStyle(container);
 
@@ -20,15 +30,13 @@ function createCtx(options) {
             width = options.width;
             height = options.height;
         }
-
-        canvas = createCanvas("canvas-" + randomString({
-            length: 12,
-            charset: 'hex'
-          }), width, height);
+        canvas = createCanvas("canvas-" + genRandomString(12), width, height);
 
         container.appendChild(canvas);
         container = null;
-    } 
+    } else {
+        throw "invalid options";
+    }
 
     var ctx = canvas.getContext("2d");
     canvas = null;
