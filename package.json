@@ -22,9 +22,10 @@
   },
   "homepage": "https://github.com/zzzze/animation-scene#readme",
   "devDependencies": {
-    "clean-webpack-plugin": "^0.1.17",
-    "webpack": "^3.8.1",
     "chai": "^4.1.2",
+    "clean-webpack-plugin": "^0.1.17",
+    "inject-loader": "^3.0.1",
+    "isparta-instrumenter-loader": "^1.0.1",
     "karma": "^1.7.1",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^2.2.0",
@@ -37,8 +38,7 @@
     "phantomjs": "^2.1.7",
     "sinon": "^4.1.2",
     "sinon-chai": "^2.14.0",
-    "isparta-instrumenter-loader": "^1.0.1"
+    "webpack": "^3.8.1"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
