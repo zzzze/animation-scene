@@ -10,7 +10,7 @@ var createCtx = createCtxInjector({
     "./genRandomString": function () {
         return "hash-test";
     }
-})
+});
 
 describe("createCtx", function () {
     var _canvas = document.createElement("canvas");

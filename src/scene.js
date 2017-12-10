@@ -1,20 +1,22 @@
 "use strict";
 var createCtx = require("./createCtx");
 
-var addMouseMoveListerner = function (element, cb) {
-    element.addEventListener('mousemove', cb);
-};
-
 function Scene(options) {
     this.ctx = createCtx(options);
     this.width = this.ctx.canvas.width;
     this.height = this.ctx.canvas.height;
 
-    addMouseMoveListerner(this.ctx.canvas, this._handleMouseMove.bind(this));
+    if (options.addMouseEventListerner === undefined || options.addMouseEventListerner) {
+        this._addMouseEventListerner();
+    }
 }
 
 Scene.prototype._autoLoop = true;
 Scene.prototype._frameCount = 0;
+
+Scene.prototype._addMouseEventListerner = function () {
+    this.ctx.canvas.addEventListener('mousemove', this._handleMouseMove.bind(this));
+};
 
 Scene.prototype._handleMouseMove = function (event) {
     this._mouseX = event.offsetX;
@@ -31,12 +33,15 @@ Scene.prototype._run = function () {
 };
 
 Scene.prototype.start = function () {
+    this.setup(this.ctx);
     this._run();
 };
 
 Scene.prototype.loop = function () {
     this.clean();
 };
+
+Scene.prototype.setup = function () {};
 
 Scene.prototype.clean = function () {
     this.ctx.clearRect(0, 0, this.width, this.height);
