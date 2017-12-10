@@ -26,6 +26,7 @@
     "clean-webpack-plugin": "^0.1.17",
     "inject-loader": "^3.0.1",
     "isparta-instrumenter-loader": "^1.0.1",
+    "coveralls": "^3.0.0",
     "karma": "^1.7.1",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^2.2.0",
