@@ -5,6 +5,7 @@ function Scene(options) {
     this.ctx = createCtx(options);
     this.width = this.ctx.canvas.width;
     this.height = this.ctx.canvas.height;
+    this.addEventListener = this.ctx.canvas.addEventListener.bind(this.ctx.canvas);
 
     if (options.addMouseEventListerner === undefined || options.addMouseEventListerner) {
         this._addMouseEventListerner();
@@ -17,7 +18,7 @@ Scene.prototype._mouseX = Number.MAX_VALUE;
 Scene.prototype._mouseY = Number.MAX_VALUE;
 
 Scene.prototype._addMouseEventListerner = function () {
-    this.ctx.canvas.addEventListener('mousemove', this._handleMouseMove.bind(this));
+    this.addEventListener('mousemove', this._handleMouseMove.bind(this));
 };
 
 Scene.prototype._handleMouseMove = function (event) {
