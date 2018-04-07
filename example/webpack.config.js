@@ -9,7 +9,7 @@ module.exports = {
 
     entry: {
         "main": [
-            './index.js',
+            './index.ts',
             "webpack-dev-server/client?http://localhost:8080/"
         ],
     },
@@ -46,7 +46,9 @@ module.exports = {
               { loader: 'style-loader' },
               { loader: 'css-loader'}
             ]
-          }
+          },
+            { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
         ]
     },
 

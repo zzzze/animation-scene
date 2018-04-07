@@ -5,17 +5,15 @@ var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     context: path.resolve(__dirname),
-    entry: {
-        "animation-scene": ['./index.js'],
-    },
+    entry: './src/index.js',
     output: {
         publicPath: "/",
-        path: path.resolve(__dirname, 'min'),
-        filename: '[name]-' + version + '.min.js',
+        path: path.resolve(__dirname, 'lib'),
+        filename: 'main.js',
         library: {
-            root: "AnimationScene",
-            amd: "animation-scene",
-            commonjs: "animation-scene"
+            root: "Scene",
+            amd: "Scene",
+            commonjs: "Scene"
           },
         libraryTarget: "umd"
     },
@@ -27,7 +25,7 @@ module.exports = {
                 drop_console: true
             }
         }),
-        new CleanWebpackPlugin(["min/"], {
+        new CleanWebpackPlugin(["lib/main.js"], {
             verbose: true
         })
     ]

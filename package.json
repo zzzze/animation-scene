@@ -1,10 +1,11 @@
 {
-  "name": "animation-scene",
+  "name": "@kapok/scene",
   "version": "0.1.0",
   "description": "Create a canvas animation scene which can loop automatically and has other usefull attributions and methods.",
-  "main": "index.js",
+  "main": "lib/main.js",
   "scripts": {
     "test": "karma start karma.config.js",
+    "build": "webpack",
     "coveralls": "cat ./coverage/lcov/lcov.info | ./node_modules/.bin/coveralls"
   },
   "repository": {
