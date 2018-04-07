@@ -3,3 +3,5 @@ example/dist
 npm-*
 min/
 coverage/
+lib/main.js
+yarn-error.log

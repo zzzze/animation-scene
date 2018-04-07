@@ -1,11 +1,13 @@
 "use strict";
-require("normalize.css");
-require("./src/style/main.scss");
-var scene = require("../");
+import "normalize.css"
+import "./src/style/main.scss"
+import Scene = require("../")
 
-var scene = scene.createScene({
+var scene = new Scene({
     containerId: "container"
-});
+})
+
+
 // scene._autoLoop = false;
 
 var x = 50, y = 50;
